@@ -9,12 +9,7 @@
     }
   },
   "parameters": {
-    "adminUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Username for the Virtual Machine."
-      }
-    },
+    ,
     "adminPassword": {
       "type": "secureString",
       "minLength": 12,
@@ -24,7 +19,7 @@
     },
     "dnsLabelPrefix": {
       "type": "string",
-      "defaultValue": "[toLower(format('{0}-{1}', parameters('vmName'), uniqueString(resourceGroup().id, parameters('vmName'))))]",
+      "defaultValue": "[toLower(format('{0}-{1}', variables('vmName'), uniqueString(resourceGroup().id, variables('vmName'))))]",
       "metadata": {
         "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
       }
@@ -141,15 +136,10 @@
         "description": "Location for all resources."
       }
     },
-    "vmName": {
-      "type": "string",
-      "defaultValue": "simple-vm",
-      "metadata": {
-        "description": "Name of the virtual machine."
-      }
-    }
+ 
   },
   "variables": {
+    "vmName": "<%=customOptions.azserName %>",
     "storageAccountName": "[format('bootdiags{0}', uniqueString(resourceGroup().id))]",
     "nicName": "myVMNic",
     "addressPrefix": "10.0.0.0/16",
@@ -263,15 +253,15 @@
     {
       "type": "Microsoft.Compute/virtualMachines",
       "apiVersion": "2021-03-01",
-      "name": "[parameters('vmName')]",
+      "name": "[variables('vmName')]",
       "location": "[parameters('location')]",
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('vmSize')]"
         },
         "osProfile": {
-          "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('adminUsername')]",
+          "computerName": "[variables('vmName')]",
+          "adminUsername": "<%username%>",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
