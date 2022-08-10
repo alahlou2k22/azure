@@ -261,7 +261,7 @@
         },
         "osProfile": {
           "computerName": "[variables('vmName')]",
-          "adminUsername": "<%username%>",
+          "adminUsername": "<%=username%>",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
