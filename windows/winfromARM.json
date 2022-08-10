@@ -136,7 +136,6 @@
         "description": "Location for all resources."
       }
     },
- 
   },
   "variables": {
     "vmName": "<%=customOptions.azserName %>",
