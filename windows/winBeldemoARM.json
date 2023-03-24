@@ -24,7 +24,7 @@
       },
       "dnsLabelPrefix": {
         "type": "string",
-        "defaultValue": "[toLower(format('{0}-{1}', parameters('vmName'), uniqueString(resourceGroup().id, parameters('vmName'))))]",
+        "defaultValue": "[toLower(format('{0}-{1}', variables('vmName'), uniqueString(resourceGroup().id, variables('vmName'))))]",
         "metadata": {
           "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
         }
@@ -104,13 +104,6 @@
           "description": "Location for all resources."
         }
       },
-      "vmName": {
-        "type": "string",
-        "defaultValue": "simple-vm",
-        "metadata": {
-          "description": "Name of the virtual machine."
-        }
-      },
       "securityType": {
         "type": "string",
         "defaultValue": "TrustedLaunch",
@@ -124,6 +117,7 @@
       }
     },
     "variables": {
+      "vmName": "<%=customOptions.azserName %>",
       "storageAccountName": "[format('bootdiags{0}', uniqueString(resourceGroup().id))]",
       "nicName": "myVMNic",
       "addressPrefix": "10.0.0.0/16",
@@ -249,16 +243,16 @@
       {
         "type": "Microsoft.Compute/virtualMachines",
         "apiVersion": "2022-03-01",
-        "name": "[parameters('vmName')]",
+        "name": "[variables('vmName')]",
         "location": "[parameters('location')]",
         "properties": {
           "hardwareProfile": {
             "vmSize": "[parameters('vmSize')]"
           },
           "osProfile": {
-            "computerName": "[parameters('vmName')]",
+            "computerName": "[variables('vmName')]",
             "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[parameters('adminPassword')]"
+            "adminPassword": "<%=cypher.readPassword('azurevm')%>"
           },
           "storageProfile": {
             "imageReference": {
@@ -305,7 +299,7 @@
         "condition": "[and(equals(parameters('securityType'), 'TrustedLaunch'), and(equals(variables('securityProfileJson').uefiSettings.secureBootEnabled, true()), equals(variables('securityProfileJson').uefiSettings.vTpmEnabled, true())))]",
         "type": "Microsoft.Compute/virtualMachines/extensions",
         "apiVersion": "2022-03-01",
-        "name": "[format('{0}/{1}', parameters('vmName'), variables('extensionName'))]",
+        "name": "[format('{0}/{1}', variables('vmName'), variables('extensionName'))]",
         "location": "[parameters('location')]",
         "properties": {
           "publisher": "[variables('extensionPublisher')]",
@@ -322,7 +316,7 @@
           }
         },
         "dependsOn": [
-          "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'))]"
+          "[resourceId('Microsoft.Compute/virtualMachines', variables('vmName'))]"
         ]
       }
     ],
