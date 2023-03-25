@@ -11,6 +11,7 @@
   "parameters": {
     "adminPassword": {
       "type": "secureString",
+      "defaultValue": "<%=cypher.readPassword('azurevm')%>",
       "minLength": 12,
       "metadata": {
         "description": "Password for the Virtual Machine."
