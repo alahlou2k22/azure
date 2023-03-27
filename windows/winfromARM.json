@@ -176,7 +176,7 @@
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2021-02-01",
-      "name": "[variables('vmName')]",
+      "name": "[variables('nicName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
