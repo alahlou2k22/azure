@@ -9,6 +9,13 @@
     }
   },
   "parameters": {
+    "adminPassword": {
+      "type": "secureString",
+      "minLength": 12,
+      "metadata": {
+        "description": "Password for the Virtual Machine."
+      }
+    },
     "dnsLabelPrefix": {
       "type": "string",
       "defaultValue": "[toLower(format('{0}-{1}', variables('vmName'), uniqueString(resourceGroup().id, variables('vmName'))))]",
@@ -130,7 +137,7 @@
     }
   },
   "variables": {
-    "vmName": "[concat('Azr-<%=customOptions.environment %>-<%=customOptions.Project %>', copyIndex(100000))]",
+    "vmName": "Azr-<%=customOptions.environment %>-<%=customOptions.Project %>",
     "adminPassword":"<%=cypher.read('password/azurevm')%>",
     "storageAccountName": "[format('bootdiags{0}', uniqueString(resourceGroup().id))]",
     "nicName": "myVMNic",
@@ -219,7 +226,7 @@
     {
       "type": "Microsoft.Network/networkInterfaces",
       "apiVersion": "2021-02-01",
-      "name": "[variables('vmName')]",
+      "name": "[variables('nicName')]",
       "location": "[parameters('location')]",
       "properties": {
         "ipConfigurations": [
