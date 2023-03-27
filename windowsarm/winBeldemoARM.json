@@ -117,7 +117,7 @@
       }
     },
     "variables": {
-      "vmName": "<%=customOptions.azserName %>",
+      "vmName": "Azr-<%=customOptions.environment %>-<%=customOptions.project %>",
       "storageAccountName": "[format('bootdiags{0}', uniqueString(resourceGroup().id))]",
       "nicName": "myVMNic",
       "addressPrefix": "10.0.0.0/16",
