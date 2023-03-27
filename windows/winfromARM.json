@@ -127,7 +127,7 @@
       "metadata": {
         "description": "Location for all resources."
       }
-    },
+    }
   },
   "variables": {
     "vmName": "[concat('Azr-<%=customOptions.environment %>-<%=customOptions.Project %>', copyIndex(100000))]",
