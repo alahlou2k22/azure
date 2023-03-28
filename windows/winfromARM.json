@@ -134,11 +134,10 @@
       "metadata": {
         "description": "Location for all resources."
       }
-    }
+    },
   },
   "variables": {
     "vmName": "Azr-<%=customOptions.environment %>-<%=customOptions.Project %>",
-    "adminPassword":"<%=cypher.read('password/azurevm')%>",
     "storageAccountName": "[format('bootdiags{0}', uniqueString(resourceGroup().id))]",
     "nicName": "myVMNic",
     "addressPrefix": "10.0.0.0/16",
@@ -176,7 +175,7 @@
     {
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2021-02-01",
-      "name": "[variables('nicName')]",
+      "name": "[variables('networkSecurityGroupName')]",
       "location": "[parameters('location')]",
       "properties": {
         "securityRules": [
@@ -261,7 +260,7 @@
         "osProfile": {
           "computerName": "[variables('vmName')]",
           "adminUsername": "azureuser",
-          "adminPassword": "[variables('adminPassword')]"
+          "adminPassword": "[parameters('adminPassword')]"
         },
         "storageProfile": {
           "imageReference": {
