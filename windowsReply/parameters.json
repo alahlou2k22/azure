@@ -1,0 +1,120 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "networkInterfaceName1": {
+            "value": "itcldpwpgwd01982_z1"
+        },
+        "networkSecurityGroupName": {
+            "value": "ITCLDPWPGWD01-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": []
+        },
+        "subnetName": {
+            "value": "default"
+        },
+        "virtualNetworkName": {
+            "value": "ITCLDPWPGWD01-vnet"
+        },
+        "addressPrefixes": {
+            "value": [
+                "10.0.0.0/16"
+            ]
+        },
+        "subnets": {
+            "value": [
+                {
+                    "name": "default",
+                    "properties": {
+                        "addressPrefix": "10.0.0.0/24"
+                    }
+                }
+            ]
+        },
+        "virtualMachineName": {
+            "value": "ITCLDPWPGWD01"
+        },
+        "virtualMachineName1": {
+            "value": "ITCLDPWPGWD01"
+        },
+        "virtualMachineComputerName1": {
+            "value": "ITCLDPWPGWD01"
+        },
+        "resourceGroupName": {
+            "value": "aldmawi1001"
+        },
+        "subscriptionID":{
+            "value": "690dae54-b735-4d6b-b218-c83ab5b6dbd6"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "osDiskDeleteOption": {
+            "value": "Delete"
+        },
+        "dataDisks1": {
+            "value": [
+                {
+                    "lun": 0,
+                    "createOption": "attach",
+                    "deleteOption": "Detach",
+                    "caching": "None",
+                    "writeAcceleratorEnabled": false,
+                    "id": null,
+                    "name": "ITCLDPWPGWD01_DataDisk_0",
+                    "storageAccountType": null,
+                    "diskSizeGB": null,
+                    "diskEncryptionSet": null
+                }
+            ]
+        },
+        "dataDiskResources1": {
+            "value": [
+                {
+                    "name": "ITCLDPWPGWD01_DataDisk_0",
+                    "sku": "StandardSSD_LRS",
+                    "properties": {
+                        "diskSizeGB": 256,
+                        "creationData": {
+                            "createOption": "empty"
+                        }
+                    }
+                }
+            ]
+        },
+        "virtualMachineSize": {
+            "value": "Standard_D4s_v3"
+        },
+        "nicDeleteOption": {
+            "value": "Detach"
+        },
+        "hibernationEnabled": {
+            "value": false
+        },
+        "adminUsername": {
+            "value": "metadmin"
+        },
+        "adminPassword": {
+            "value": "_Admin1234567890_"
+            // "reference": {
+            //     "keyVault": {
+            //       "id": "/subscriptions/690dae54-b735-4d6b-b218-c83ab5b6dbd6/resourceGroups/IACTEST-DEV-RG/providers/Microsoft.KeyVault/vaults/AKV-04"
+            //     },
+            //     "secretName": "TesPassword"
+            // }
+        },
+        "patchMode": {
+            "value": "AutomaticByOS"
+        },
+        "enableHotpatching": {
+            "value": false
+        },
+        "virtualMachine1Zone": {
+            "value": "1"
+        }
+    }
+}
